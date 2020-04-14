@@ -13,26 +13,31 @@ import com.example.android.trackmysleepquality.database.SleepNight
  **/
 
 @BindingAdapter("sleepDurationFormatted")
-fun AppCompatTextView.setSleepDurationFormatted(item: SleepNight) {
-    text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, context.resources)
+fun AppCompatTextView.setSleepDurationFormatted(item: SleepNight?) {
+    item?.let {
+        text = convertDurationToFormatted(it.startTimeMilli, it.endTimeMilli, context.resources)
+    }
+
 }
 
 @BindingAdapter("sleepQualityString")
-fun AppCompatTextView.setSleepQualityString(item: SleepNight) {
+fun AppCompatTextView.setSleepQualityString(item: SleepNight?) {
     item?.let {
-        text = convertNumericQualityToString(item.sleepQuality, context.resources)
+        text = convertNumericQualityToString(it.sleepQuality, context.resources)
     }
 }
 
 @BindingAdapter("sleepImage")
-fun AppCompatImageView.setSleepImage(item: SleepNight) {
-    setImageResource(when (item.sleepQuality) {
-        0 -> R.drawable.ic_sleep_0
-        1 -> R.drawable.ic_sleep_1
-        2 -> R.drawable.ic_sleep_2
-        3 -> R.drawable.ic_sleep_3
-        4 -> R.drawable.ic_sleep_4
-        5 -> R.drawable.ic_sleep_5
-        else -> R.drawable.ic_sleep_active
-    })
+fun AppCompatImageView.setSleepImage(item: SleepNight?) {
+    item?.let {
+        setImageResource(when (it.sleepQuality) {
+            0 -> R.drawable.ic_sleep_0
+            1 -> R.drawable.ic_sleep_1
+            2 -> R.drawable.ic_sleep_2
+            3 -> R.drawable.ic_sleep_3
+            4 -> R.drawable.ic_sleep_4
+            5 -> R.drawable.ic_sleep_5
+            else -> R.drawable.ic_sleep_active
+        })
+    }
 }
