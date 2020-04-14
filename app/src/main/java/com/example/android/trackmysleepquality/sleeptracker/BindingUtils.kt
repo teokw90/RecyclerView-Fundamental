@@ -19,7 +19,9 @@ fun AppCompatTextView.setSleepDurationFormatted(item: SleepNight) {
 
 @BindingAdapter("sleepQualityString")
 fun AppCompatTextView.setSleepQualityString(item: SleepNight) {
-    text = convertNumericQualityToString(item.sleepQuality, context.resources)
+    item?.let {
+        text = convertNumericQualityToString(item.sleepQuality, context.resources)
+    }
 }
 
 @BindingAdapter("sleepImage")
